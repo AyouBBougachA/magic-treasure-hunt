@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wrong Code!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Cinzel', serif;
+    background: radial-gradient(circle, #2b0d0d 60%, #0f0000);
+    color: #ff6666;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px red;
+  }
+
+  #retryBtn {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: none;
+    background: #6a4c93;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  #retryBtn:hover {
+    transform: scale(1.1);
+    background: #8a63c3;
+  }
+</style>
+</head>
+<body>
+<h1>❌ Wrong Code!</h1>
+<p>Don't worry, try again!</p>
+<button id="retryBtn">Retry</button>
+
+<script>
+document.getElementById('retryBtn').onclick = () => {
+  window.location.href = "index.html"; // reload the code entry page
+};
+</script>
+</body>
+</html>

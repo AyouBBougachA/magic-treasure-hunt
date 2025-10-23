@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Magic Code Entry</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Cinzel", serif;
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: black;
+        color: #f0e6d2;
+      }
+
+      /* Star background animation */
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle linear infinite;
+      }
+
+      @keyframes twinkle {
+        0% {
+          transform: translateY(0px);
+          opacity: 0.2;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(600px);
+          opacity: 0.2;
+        }
+      }
+
+      h1 {
+        z-index: 10;
+        margin-bottom: 20px;
+        font-size: 2rem;
+        text-shadow: 0 0 10px gold;
+      }
+
+      .code-boxes {
+        display: flex;
+        gap: 10px;
+        z-index: 10;
+      }
+
+      .code-boxes input {
+        width: 70px;
+        height: 60px;
+        text-align: center;
+        font-size: 2rem;
+        border-radius: 10px;
+        border: 2px solid #6a4c93;
+        background: rgba(26, 26, 37, 0.8);
+        color: #ffd700;
+        box-shadow: 0 0 5px gold;
+      }
+
+      .code-boxes input:focus {
+        outline: none;
+        border-color: #ffd700;
+      }
+
+      #submitBtn {
+        margin-top: 20px;
+        padding: 10px 25px;
+        font-size: 1.2rem;
+        background: #6a4c93;
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      #submitBtn:hover {
+        background: #8a63c3;
+      }
+
+      #message {
+        margin-top: 20px;
+        font-size: 1.5rem;
+        z-index: 10;
+        text-shadow: 0 0 5px gold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Enter the Magic Code</h1>
+    <div class="code-boxes">
+      <input type="text" maxlength="2" id="box1" />
+      <input type="text" maxlength="2" id="box2" />
+      <input type="text" maxlength="2" id="box3" />
+      <input type="text" maxlength="2" id="box4" />
+    </div>
+    <button id="submitBtn">Submit</button>
+    <p id="message"></p>
+
+    <script>
+      const correctCode = ["1", "2", "3", "4"]; // each box has 2-digit part
+      const boxes = [
+        document.getElementById("box1"),
+        document.getElementById("box2"),
+        document.getElementById("box3"),
+        document.getElementById("box4"),
+      ];
+      const message = document.getElementById("message");
+
+      // Create moving stars
+      for (let i = 0; i < 100; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.left = Math.random() * window.innerWidth + "px";
+        star.style.top = Math.random() * window.innerHeight + "px";
+        star.style.animationDuration = 2 + Math.random() * 3 + "s";
+        star.style.width = star.style.height = 1 + Math.random() * 3 + "px";
+        document.body.appendChild(star);
+      }
+
+      // auto focus to next box
+      boxes.forEach((box, index) => {
+        box.addEventListener("input", () => {
+          if (box.value.length === 2 && index < boxes.length - 1) {
+            boxes[index + 1].focus();
+          }
+        });
+      });
+
+      // submit button
+      document.getElementById("submitBtn").onclick = () => {
+        let enteredCode = boxes.map((box) => box.value);
+        let isCorrect = enteredCode.every(
+          (val, idx) => val === correctCode[idx]
+        );
+
+        if (isCorrect) {
+          window.location.href = "yeeeeeeey.html"; // redirect to success page
+        } else {
+          window.location.href = "sadlyno.html"; // redirect to failure page
+        }
+      };
+    </script>
+  </body>
+</html>
